@@ -69,7 +69,7 @@ def verify_document(
 
     db.commit()
 
-    # AUDIT LOG
+    
     create_audit_log(
     db=db,
     user_id=current_user.id,
@@ -111,17 +111,17 @@ def upload_document(
             detail="Only PDF files allowed"
         )
 
-    # 2. Save file
+    
     unique_filename = str(uuid.uuid4()) + "_" + file.filename
     file_path = os.path.join(UPLOAD_FOLDER, unique_filename)
 
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    # 3. Generate hash
+    
     blockchain_hash = generate_file_hash(file_path)
 
-    # 4. Save document in DB
+    
     new_document = TradeDocument(
         title=title,
         document_type=document_type,
@@ -198,7 +198,7 @@ def download_document(
             detail="Document not found"
         )
 
-    # AUDIT LOG
+
     create_audit_log(
         db=db,
         user_id=current_user.id,
@@ -243,7 +243,7 @@ def delete_document(
             detail="Document not found"
         )
 
-    # DELETE FILE FROM FOLDER
+    
     if document.file_path and os.path.exists(document.file_path):
         os.remove(document.file_path)
     # AUDIT LOG
@@ -262,7 +262,7 @@ def delete_document(
         action="DELETE_DOCUMENT",
         event_details=f"Deleted document {document.id}"
         )
-    # DELETE RELATED LEDGER ENTRIES
+   
     db.query(LedgerEntry).filter(
         LedgerEntry.document_id == document.id
     ).delete()
@@ -274,6 +274,8 @@ def delete_document(
     return {
         "message": "Document deleted successfully"
     }
+
+#---------------------------------------
 @router.get("/")
 def get_all_documents(
     db: Session = Depends(get_db),
@@ -287,6 +289,7 @@ def get_all_documents(
     ).all()
     return documents
 
+#-------------------------
 @router.get("/ledger")
 def get_ledger(
     db: Session = Depends(get_db),
@@ -313,6 +316,8 @@ def get_ledger(
 
     return ledger_data
 
+
+#---------recent-activity------
 @router.get("/recent-activity")
 def recent_activity(
     db: Session = Depends(get_db),
@@ -326,6 +331,8 @@ def recent_activity(
     ).limit(10).all()
 
     return logs
+
+#---------search-----------
 @router.get("/search")
 def search_documents(
     document_type: str = None,

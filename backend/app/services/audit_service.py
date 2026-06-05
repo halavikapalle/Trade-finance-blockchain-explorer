@@ -10,7 +10,7 @@ def generate_hash(data: dict):
 
 def create_audit_log(db, user_id, action, details=""):
 
-    # get previous log
+    
     last_log = db.query(AuditLog).order_by(
         AuditLog.id.desc()
     ).first()

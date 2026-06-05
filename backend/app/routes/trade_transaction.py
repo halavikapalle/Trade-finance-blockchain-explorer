@@ -35,7 +35,7 @@ def create_transaction(
     status="pending",
     risk_score=risk_score
 )
-# 🔥 calculate risk BEFORE saving
+
     new_transaction.risk_score = calculate_risk_score(new_transaction)
     risk_score = calculate_risk(transaction.amount, "pending")
     db.add(new_transaction)

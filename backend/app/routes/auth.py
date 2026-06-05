@@ -42,7 +42,7 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    # ✅ audit log MUST be here (before return)
+    
     create_audit_log(
         db,
         user_id=new_user.id,
@@ -78,7 +78,7 @@ def login_user(
         "role": db_user.role
     })
 
-    # ✅ audit log for login
+    
     create_audit_log(
         db,
         user_id=db_user.id,

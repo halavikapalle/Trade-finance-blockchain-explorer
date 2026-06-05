@@ -29,7 +29,7 @@ def get_audit_logs(
     current_user = Depends(get_current_user)
 ):
 
-    # ADMIN CHECK
+    
     if current_user.role != "admin":
 
         raise HTTPException(
