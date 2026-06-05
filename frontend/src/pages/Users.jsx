@@ -49,7 +49,7 @@ function Users() {
     fetchUsers();
   }, []);
 
-  // Delete User
+
   const deleteUser = async (id) => {
 
     const confirmDelete = window.confirm(

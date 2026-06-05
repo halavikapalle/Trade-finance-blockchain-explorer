@@ -42,7 +42,7 @@ function Documents() {
     }
   };
 
-  // VERIFY DOCUMENT
+  
   const verifyDocument = async (id) => {
 
     try {
@@ -72,7 +72,7 @@ function Documents() {
     }
   };
 
-  // DOWNLOAD DOCUMENT
+  
   const downloadDocument = async (id) => {
 
     try {
@@ -114,7 +114,7 @@ function Documents() {
     }
   };
 
-  // DELETE DOCUMENT
+  
   const deleteDocument = async (id) => {
 
     const confirmed = window.confirm(
