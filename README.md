@@ -1,173 +1,117 @@
-<<<<<<< HEAD
-# Trade-finance-blockchain-explorer
+Trade Finance Blockchain Explorer
 📌 Overview
-=======
-# Trade Finance Blockchain Explorer
 
-## 📌 Overview
->>>>>>> 2f29c15 (frontend completed)
-A full-stack Trade Finance Explorer that provides transparent, tamper-evident tracking of trade documents, transactions, and audit logs using a ledger-based architecture with risk analytics.
+A full-stack Trade Finance Management System designed to provide secure, transparent, and tamper-evident tracking of trade documents, transactions, and audit logs.
 
-The system simulates blockchain-like traceability for financial trade operations.
+The system implements a blockchain-inspired immutable ledger architecture using cryptographic hashing and structured event logging to ensure data integrity, traceability, and auditability across financial operations.
 
-<<<<<<< HEAD
 🚀 Features
-🔐 Authentication
-JWT-based login system
-Role-based access (Admin/User)
+🔐 Authentication & Authorization
+JWT-based secure login system
+Role-based access control (Admin / User)
+Protected frontend and backend routes
 📄 Document Management
-Upload trade documents
-File hashing for integrity verification
-Stored in secure backend storage
+Upload and manage trade documents
+File integrity verification using SHA-256 hashing
+Secure backend storage system
 📊 Ledger Explorer
-Chronological event tracking
-Immutable audit trail of trade actions
-Actor-based tracking (buyer/seller/system)
-💰 Trade Transactions
-Create and track trade transactions
-Status lifecycle: pending → verified → completed
+Chronological event-based ledger system
+Immutable audit trail of all trade activities
+Actor-based tracking (Buyer / Seller / System)
+Full transaction traceability
+💰 Trade Transaction System
+Create, update, and track trade transactions
+
+Status flow:
+
+Pending → Verified → Completed
 ⚠️ Risk Engine
-Automated risk scoring for transactions
-Risk classification based on rules
+Rule-based risk scoring system
+Risk classification for transactions
+Helps identify high-risk trade activities
 📈 Analytics Dashboard
-Document type distribution
+Interactive charts using Recharts
+Document distribution analysis
 Verification status metrics
 Audit log insights
-Interactive charts (Recharts)
 📤 Export System
-Export analytics to PDF
-Export data to Excel
-🏗️ Architecture
-Frontend (React + Vite) ↓ Backend (FastAPI) ↓ PostgreSQL Database ↓ Services Layer:
-
-Risk Engine
-Hash Service
-Export Service
-🛠️ Tech Stack
-Frontend:
-
-React.js
-Axios
-Recharts
-Tailwind CSS
-Backend:
-
-FastAPI
-SQLAlchemy
-PostgreSQL
-JWT Authentication
-Tools:
-
-Pandas (export)
-jsPDF
-XLSX
-📊 Key Modules
-Auth Module
-Ledger Module
-Analytics Module
-Risk Scoring Module
-Export Module
-📷 Screenshots
-(Add dashboard, ledger, analytics screenshots here)
-
-⚙️ Setup Instructions
-Backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-=======
----
-
-## 🚀 Features
-
-### 🔐 Authentication
-- JWT-based login system
-- Role-based access (Admin/User)
-
-### 📄 Document Management
-- Upload trade documents
-- File hashing for integrity verification
-- Stored in secure backend storage
-
-### 📊 Ledger Explorer
-- Chronological event tracking
-- Immutable audit trail of trade actions
-- Actor-based tracking (buyer/seller/system)
-
-### 💰 Trade Transactions
-- Create and track trade transactions
-- Status lifecycle: pending → verified → completed
-
-### ⚠️ Risk Engine
-- Automated risk scoring for transactions
-- Risk classification based on rules
-
-### 📈 Analytics Dashboard
-- Document type distribution
-- Verification status metrics
-- Audit log insights
-- Interactive charts (Recharts)
-
-### 📤 Export System
-- Export analytics to PDF
-- Export data to Excel
-
----
-
-## 🏗️ Architecture
-
+Export reports to PDF (jsPDF)
+Export data to Excel (XLSX)
+Business reporting support
+🏗️ System Architecture
 Frontend (React + Vite)
         ↓
 Backend (FastAPI)
         ↓
 PostgreSQL Database
         ↓
-Services Layer:
-- Risk Engine
-- Hash Service
-- Export Service
+Service Layer:
+   ├── Authentication (JWT)
+   ├── Ledger Service (Event Tracking)
+   ├── Risk Engine (Rule-based scoring)
+   ├── Hash Service (SHA-256 Integrity)
+   ├── Export Service (PDF/Excel)
+🛠️ Tech Stack
+Frontend
+React.js
+Vite
+Axios
+Recharts
+Tailwind CSS
+Backend
+FastAPI
+SQLAlchemy ORM
+JWT Authentication
+Pydantic Validation
+Database
+PostgreSQL
+Tools / Libraries
+SHA-256 hashing (data integrity)
+jsPDF (PDF export)
+XLSX (Excel export)
+Pandas (data processing)
+📸 Screenshots
+🏠 Dashboard
 
----
+📊 Analytics
 
-## 🛠️ Tech Stack
+📜 Ledger Explorer
 
-Frontend:
-- React.js
-- Axios
-- Recharts
-- Tailwind CSS
+⚠️ Risk Analysis
 
-Backend:
-- FastAPI
-- SQLAlchemy
-- PostgreSQL
-- JWT Authentication
+📄 Documents Module
 
-Tools:
-- Pandas (export)
-- jsPDF
-- XLSX
+📤 Upload Module
 
----
+👤 Users Management
 
-## 📊 Key Modules
+📜 Audit Logs
 
-- Auth Module
-- Ledger Module
-- Analytics Module
-- Risk Scoring Module
-- Export Module
+🧠 Key Concept
 
----
+This project implements a:
 
-## 📷 Screenshots
-(Add dashboard, ledger, analytics screenshots here)
+Blockchain-inspired ledger system using cryptographic hashing and immutable event logs to ensure tamper-evident tracking of trade finance operations.
 
----
+👨‍💻 Core Modules
 
-## ⚙️ Setup Instructions
+Authentication Module
+Ledger / Audit Module
+Transaction Management Module
+Risk Scoring Engine
+Analytics & Visualization Module
+Export & Reporting Module
 
-### Backend
-```bash
+⚙️ Setup Instructions
+
+Backend
 pip install -r requirements.txt
 uvicorn app.main:app --reload
->>>>>>> 2f29c15 (frontend completed)
+
+Frontend
+npm install
+npm run dev
+👨‍💻 Author
+
+Halavika Palle
+CSE Final Year Student
