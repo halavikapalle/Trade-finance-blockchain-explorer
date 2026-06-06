@@ -130,55 +130,47 @@ Service Layer
 
 ---
 
+
 # 📸 Application Screenshots
 
 ## 🏠 Dashboard
-
 ![Dashboard](assets/dashboard.png)
 
 ---
 
 ## 📊 Analytics Dashboard
-
 ![Analytics](assets/analytics.png)
 
 ---
 
 ## 📜 Ledger Explorer
-
 ![Ledger](assets/ledger.png)
 
 ---
 
 ## ⚠️ Risk Analysis
-
 ![Risk](assets/risk.png)
 
 ---
 
 ## 📄 Documents Module
-
 ![Documents](assets/documents.png)
 
 ---
 
 ## 📤 Upload Module
-
 ![Upload](assets/upload.png)
 
 ---
 
 ## 👤 Users Management
-
 ![Users](assets/users.png)
 
 ---
 
 ## 📜 Audit Logs
-
 ![Audit Logs](assets/auditlogs.png)
 
----
 
 # 🧠 Core Concept
 
