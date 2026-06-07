@@ -7,9 +7,10 @@ function Register() {
   name: "",
   email: "",
   password: "",
-  role: "buyer",
+  role: "",
   org_name: "",
 });
+
 
   const navigate = useNavigate();
 

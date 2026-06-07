@@ -27,6 +27,8 @@ router = APIRouter(
 
 @router.post("/register")
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
+    if not user.email or not user.password:
+        raise HTTPException(status_code=400, detail="Missing fields")
 
     hashed_password = hash_password(user.password)
 
