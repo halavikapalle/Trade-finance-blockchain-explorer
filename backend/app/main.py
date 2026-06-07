@@ -20,7 +20,7 @@ from app.routes.risk import router as risk_router
 from app.routes.analytics import router as analytics_router
 from app.routes.export import router as export_router
 from fastapi import WebSocket, WebSocketDisconnect
-from fastapi.middleware.cors import CORSMiddleware
+
 from app.routes.user import router as user
 import asyncio
 
@@ -36,7 +36,10 @@ Base.metadata.create_all(bind=engine)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://trade-finance-blockchain-explorer-sable.vercel.app"
+        "https://trade-finance-blockchain-explorer-sable.vercel.app",
+        "https://trade-finance-blockchain-explorer.vercel.app",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
     ],
     allow_credentials=True,
     allow_methods=["*"],
