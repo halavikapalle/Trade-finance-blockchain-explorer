@@ -25,7 +25,7 @@ function UploadDocument() {
       formData.append("file", file);
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/documents/upload",
+        "https://trade-finance-backend-oi57.onrender.com/documents/upload",
         formData,
         {
           headers: {

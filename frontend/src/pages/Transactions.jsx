@@ -14,8 +14,8 @@ function Transactions() {
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/transactions/"
-      );
+  "https://trade-finance-backend-oi57.onrender.com/transactions/"
+);
 
       setTransactions(response.data);
     } catch (error) {
@@ -32,19 +32,19 @@ function Transactions() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://127.0.0.1:8000/transactions/",
-        {
-          buyer_id: Number(buyerId),
-          seller_id: Number(sellerId),
-          amount: Number(amount),
-          currency,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  "https://trade-finance-backend-oi57.onrender.com/transactions/",
+  {
+    buyer_id: Number(buyerId),
+    seller_id: Number(sellerId),
+    amount: Number(amount),
+    currency,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
       toast.success("Transaction created successfully");
 
@@ -62,7 +62,7 @@ function Transactions() {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://127.0.0.1:8000/transactions/${id}/status`,
+        `https://trade-finance-backend-oi57.onrender.com/transactions/${id}/status`,
         {
           status,
         }
@@ -79,7 +79,7 @@ function Transactions() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://127.0.0.1:8000/transactions/${id}`,
+        `https://trade-finance-backend-oi57.onrender.com/transactions/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

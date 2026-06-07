@@ -33,7 +33,7 @@ function Analytics() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://127.0.0.1:8000/analytics/",
+        "https://trade-finance-backend-oi57.onrender.com/analytics/",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ useEffect(() => {
   
 useEffect(() => {
   const ws = new WebSocket(
-    "ws://127.0.0.1:8000/ws/analytics"
+    "ws://https://trade-finance-backend-oi57.onrender.com:8000/ws/analytics"
   );
 
   ws.onopen = () => {

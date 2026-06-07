@@ -30,7 +30,7 @@ function Login() {
     try {
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/auth/login",
+        "https://trade-finance-backend-oi57.onrender.com/auth/login",
         formData
       )
       console.log(response.data);

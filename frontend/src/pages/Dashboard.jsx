@@ -29,7 +29,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://127.0.0.1:8000/dashboard/stats",
+        "https://trade-finance-backend-oi57.onrender.com/dashboard/stats",
         {
           headers: {
             Authorization: `Bearer ${token}`

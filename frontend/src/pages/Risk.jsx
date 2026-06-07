@@ -21,7 +21,7 @@ function Risk() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://127.0.0.1:8000/risk/",
+        "https://trade-finance-backend-oi57.onrender.com/risk/",
         {
           headers: {
             Authorization: `Bearer ${token}`,

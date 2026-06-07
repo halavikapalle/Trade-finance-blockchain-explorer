@@ -21,7 +21,9 @@ function Register() {
     e.preventDefault();
 
     try {
-      await axios.post("http://127.0.0.1:8000/auth/register", form);
+      await axios.post(
+        "https://trade-finance-backend-oi57.onrender.com/auth/register" 
+      );
       toast.success("Account created successfully");
       navigate("/login");
     } catch (error) {

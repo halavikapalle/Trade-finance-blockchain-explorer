@@ -13,35 +13,29 @@ function Documents() {
     fetchDocuments();
   }, []);
 
-  const fetchDocuments = async () => {
+ const fetchDocuments = async () => {
+  try {
+    setLoading(true);
 
-    try {
+    const token = localStorage.getItem("token");
 
-      setLoading(true);
-      console.log("TOKEN:", localStorage.getItem("token"));
-      const token = localStorage.getItem("token");
+    const response = await axios.get(
+      "https://trade-finance-backend-oi57.onrender.com/documents/",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-      const response = await axios.get(
-        "http://127.0.0.1:8000/documents/",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    setDocuments(response.data);
 
-      setDocuments(response.data);
-
-    } catch (error) {
-
-      console.error(error);
-
-    } finally {
-
-      setLoading(false);
-    }
-  };
-
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
   
   const verifyDocument = async (id) => {
 
@@ -50,7 +44,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `http://127.0.0.1:8000/documents/verify/${id}`,
+        "https://trade-finance-backend-oi57.onrender.com/documents/verify/${id}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,7 +74,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `http://127.0.0.1:8000/documents/download/${id}`,
+        "https://trade-finance-backend-oi57.onrender.com/documents/download/${id}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -128,7 +122,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://127.0.0.1:8000/documents/${id}`,
+        "https://trade-finance-backend-oi57.onrender.com/documents/${id}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
