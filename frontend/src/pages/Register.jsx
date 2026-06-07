@@ -23,8 +23,9 @@ function Register() {
 
     try {
       await axios.post(
-        "https://trade-finance-backend-oi57.onrender.com/auth/register" 
-  {
+        "https://trade-finance-backend-oi57.onrender.com/auth/register" ,
+      
+      {
     name: form.name,
     email: form.email,
     password: form.password,
