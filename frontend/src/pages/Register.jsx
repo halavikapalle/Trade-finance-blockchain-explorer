@@ -24,15 +24,25 @@ function Register() {
     try {
       await axios.post(
         "https://trade-finance-backend-oi57.onrender.com/auth/register" 
-      );
+  {
+    name: form.name,
+    email: form.email,
+    password: form.password,
+    role: form.role,
+    org_name: form.org_name
+  }
+);
+
       toast.success("Account created successfully");
       navigate("/login");
-    } catch (error) {
+    } 
+    catch (error) {
 
       console.log(error);
 
       toast.error("Registration failed");
     }
+    
   };
 
   return (
