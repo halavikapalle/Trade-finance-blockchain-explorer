@@ -61,7 +61,7 @@ useEffect(() => {
   
 useEffect(() => {
   const ws = new WebSocket(
-    "ws://https://trade-finance-backend-oi57.onrender.com:8000/ws/analytics"
+    "ws://trade-finance-backend-oi57.onrender.com/ws/analytics"
   );
 
   ws.onopen = () => {
