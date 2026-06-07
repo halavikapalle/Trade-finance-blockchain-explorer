@@ -31,9 +31,13 @@ Base.metadata.create_all(bind=engine)
 
 
 
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://https://trade-finance-backend-oi57.onrender.com:5173"],
+    allow_origins=[
+        "https://trade-finance-blockchain-explorer-sable.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
