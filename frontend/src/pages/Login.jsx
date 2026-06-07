@@ -21,14 +21,14 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-  const formData = new URLSearchParams();
-  formData.append("username", email);
-  formData.append("password", password);
+  const params = new URLSearchParams();
+  params.append("username", email);
+  params.append("password", password);
 
   try {
     const response = await axios.post(
       "https://trade-finance-backend-oi57.onrender.com/auth/login",
-      formData,
+      params,
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
