@@ -19,57 +19,34 @@ function Login() {
   const [showAccounts, setShowAccounts] = useState(false);
   const [savedUsers, setSavedUsers] = useState([]);
   const handleLogin = async (e) => {
+    e.preventDefault();
 
-    e.preventDefault()
+  const formData = new URLSearchParams();
+  formData.append("username", email);
+  formData.append("password", password);
 
-    const formData = new FormData()
-
-    formData.append("username", email)
-    formData.append("password", password)
-
-    try {
-
-      const response = await axios.post(
-        "https://trade-finance-backend-oi57.onrender.com/auth/login",
-        formData
-      )
-      console.log(response.data);
-
-      localStorage.setItem(
-        "token",
-        response.data.access_token
-      )
-
-      localStorage.setItem(
-  "role",
-  response.data.role
-      )
-      toast.success("Login successful");
-      const existingUsers =
-        JSON.parse(localStorage.getItem("savedUsers"))
-        || [];
-
-      if (!existingUsers.includes(email)) {
-
-        existingUsers.push(email);
-
-        localStorage.setItem(
-          "savedUsers",
-          JSON.stringify(existingUsers)
-        );
+  try {
+    const response = await axios.post(
+      "https://trade-finance-backend-oi57.onrender.com/auth/login",
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
       }
+    );
 
-    
+    localStorage.setItem("token", response.data.access_token);
+    localStorage.setItem("role", response.data.role);
 
-      navigate("/dashboard")
+    toast.success("Login successful");
+    navigate("/dashboard");
 
-    } catch (error) {
-
-      console.log(error)
-
-      toast.error("Invalid email or password");
-    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Invalid email or password");
   }
+};
   useEffect(() => {
 
   const users =

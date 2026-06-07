@@ -59,8 +59,10 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
 def login_user(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
-    ):
+):
 
+    print("USERNAME:", form_data.username)
+    print("PASSWORD:", form_data.password)
     db_user = db.query(User).filter(
         User.email == form_data.username
     ).first()
