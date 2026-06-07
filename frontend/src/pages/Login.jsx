@@ -112,13 +112,16 @@ function Login() {
 
       </div> 
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          className="w-full p-4 rounded-xl bg-gray-800 border border-gray-600 text-white placeholder-gray-400 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+       <input
+  type="text"
+  placeholder="Enter Password"
+  value={password}
+  onChange={(e) => {
+    console.log("PASSWORD:", e.target.value);
+    setPassword(e.target.value);
+  }}
+  className="w-full p-4 rounded-xl bg-white text-black border"
+/>
 
         <button
           type="submit"
