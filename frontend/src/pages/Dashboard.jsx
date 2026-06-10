@@ -12,7 +12,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
-
+const API = import.meta.env.VITE_API_URL;
 function Dashboard() {
   const [stats, setStats] = useState({
     total_documents: 0,
@@ -29,7 +29,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/dashboard/stats",
+         `${API}/dashboard`,
         {
           headers: {
             Authorization: `Bearer ${token}`
