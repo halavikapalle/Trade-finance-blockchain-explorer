@@ -38,7 +38,7 @@ app.add_middleware(
     allow_origins=[
         "https://trade-finance-blockchain-explorer-53lf-eoaj2sjj2.vercel.app"
         "https://trade-finance-blockchain-explorer-sable.vercel.app",
-        "https://trade-finance-blockchain-explorer.vercel.app",
+        "https://trade-finance-blockchain-explorer-5.vercel.app",
         "http://localhost:5173",
         "http://127.0.0.1:5173"
     ],
