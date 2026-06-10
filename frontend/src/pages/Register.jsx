@@ -8,7 +8,7 @@ function Register() {
   name: "",
   email: "",
   password: "",
-  role: "",
+  role: "buyer",
   org_name: "",
 });
 
