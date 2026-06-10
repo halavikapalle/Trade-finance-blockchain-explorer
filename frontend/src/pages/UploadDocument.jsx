@@ -25,7 +25,7 @@ function UploadDocument() {
       formData.append("file", file);
 
       const response = await axios.post(
-      `${API}/documents/upload`
+      `${API}/documents/upload`,
         formData,
         {
           headers: {
