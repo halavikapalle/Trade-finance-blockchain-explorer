@@ -20,12 +20,12 @@ import {
   Cell,
   Legend,
 } from "recharts";
-
+const API = import.meta.env.VITE_API_URL;
 function Analytics() {
   const [analytics, setAnalytics] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [error, setError] = useState(null);
-
+  const API = import.meta.env.VITE_API_URL;
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
 
   const fetchAnalytics = async () => {
@@ -33,7 +33,7 @@ function Analytics() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/analytics/",
+      `${API}/analytics/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ useEffect(() => {
   
 useEffect(() => {
   const ws = new WebSocket(
-    "ws://trade-finance-backend-oi57.onrender.com/ws/analytics"
+    "wss://trade-finance-backend-oi57.onrender.com/ws/analytics"
   );
 
   ws.onopen = () => {

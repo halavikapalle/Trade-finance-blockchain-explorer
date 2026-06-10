@@ -11,7 +11,7 @@ function UploadDocument() {
   const [file, setFile] = useState(null);
 
   const handleUpload = async (e) => {
-
+  const API = import.meta.env.VITE_API_URL;
     e.preventDefault();
 
     try {
@@ -25,7 +25,7 @@ function UploadDocument() {
       formData.append("file", file);
 
       const response = await axios.post(
-        "https://trade-finance-backend-oi57.onrender.com/documents/upload",
+      `${API}/documents/upload`
         formData,
         {
           headers: {

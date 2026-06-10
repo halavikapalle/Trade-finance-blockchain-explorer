@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate, Link} from "react-router-dom"
 import { toast } from "react-toastify";
+const API = import.meta.env.VITE_API_URL;
 function Login() {
   
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function Login() {
 
   try {
     const response = await axios.post(
-      "https://trade-finance-backend-oi57.onrender.com/auth/login",
+      `${API}/auth/login`,
       params,
       {
         headers: {
@@ -113,15 +114,15 @@ function Login() {
       </div> 
 
        <input
-  type="text"
-  placeholder="Enter Password"
-  value={password}
-  onChange={(e) => {
-    console.log("PASSWORD:", e.target.value);
-    setPassword(e.target.value);
-  }}
-  className="w-full p-4 rounded-xl bg-white text-black border"
-/>
+        type="password"
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => {
+          console.log("PASSWORD:", e.target.value);
+          setPassword(e.target.value);
+        }}
+        className="w-full p-4 rounded-xl bg-white text-black border"
+      />
 
         <button
           type="submit"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+const API = import.meta.env.VITE_API_URL;
 function Register() {
   const [form, setForm] = useState({
   name: "",
@@ -23,7 +24,7 @@ function Register() {
 
     try {
       await axios.post(
-        "https://trade-finance-backend-oi57.onrender.com/auth/register" ,
+         `${API}/auth/register`,
       
       {
     name: form.name,
