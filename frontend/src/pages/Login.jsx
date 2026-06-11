@@ -27,7 +27,7 @@ function Login() {
   params.append("password", password);
 
   try {
-    const response = await axios.post(
+  const response = await axios.post(
       `${API}/auth/login`,
       params,
       {
@@ -44,9 +44,13 @@ function Login() {
     navigate("/dashboard");
 
   } catch (error) {
-    console.log(error);
-    toast.error("Invalid email or password");
-  }
+  console.log("FULL ERROR:", error);
+  console.log("RESPONSE:", error.response);
+
+  toast.error(
+    error.response?.data?.detail || "Login failed"
+  );
+}
 };
   useEffect(() => {
 
