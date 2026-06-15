@@ -36,8 +36,7 @@ Base.metadata.create_all(bind=engine)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://trade-finance-blockchain-explorer-58ipgv8ca-halavika-s-projects.vercel.app",
-        "https://trade-finance-blockchain-explorer-53lf-eoaj2sjj2.vercel.app",  
+        "https://trade-finance-blockchain-explorer-53lf-eoaj2sjj2.vercel.app",
         "https://trade-finance-blockchain-explorer-sable.vercel.app",
         "https://trade-finance-blockchain-explorer-5.vercel.app",
         "http://localhost:5173",
@@ -47,6 +46,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # ROUTES
 app.include_router(auth_router)
 app.include_router(document_router)
