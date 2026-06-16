@@ -36,36 +36,37 @@ function Transactions() {
   }, []);
 
   const createTransaction = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  try {
+    const token = localStorage.getItem("token");
 
-      await axios.post(
-        `${API}/transactions/`,
-  {
-    buyer_id: Number(buyerId),
-    seller_id: Number(sellerId),
-    amount: Number(amount),
-    currency,
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    await axios.post(
+      `${API}/transactions/`,
+      {
+        buyer_id: Number(buyerId),
+        seller_id: Number(sellerId),
+        amount: Number(amount),
+        currency,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    toast.success("Transaction created successfully");
+
+    setBuyerId("");
+    setSellerId("");
+    setAmount("");
+
+    fetchTransactions();
+
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to create transaction");
   }
-);
-
-      toast.success("Transaction created successfully");
-
-      setBuyerId("");
-      setSellerId("");
-      setAmount("");
-
-      fetchTransactions();
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to create transaction");
-    }
-  };
+};
 
   const updateStatus = async (id, status) => {
     try {
