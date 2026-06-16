@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+const API = import.meta.env.VITE_API_URL;
 function Risk() {
 
   const [riskData, setRiskData] = useState([]);
@@ -21,7 +21,7 @@ function Risk() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/risk/",
+        `${API}/risk/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -79,7 +79,17 @@ function Risk() {
 
               <tbody>
 
-                {riskData.map((doc) => (
+            {riskData.length === 0 ? (
+
+              <tr>
+                <td colSpan="3" className="p-5 text-center text-gray-500">
+                  No risk analysis data available
+                </td>
+              </tr>
+
+            ) : (
+
+              riskData.map((doc) => (
 
                   <tr
                     key={doc.id}
@@ -114,7 +124,8 @@ function Risk() {
 
                   </tr>
 
-                ))}
+                ))
+      )}
 
               </tbody>
 
