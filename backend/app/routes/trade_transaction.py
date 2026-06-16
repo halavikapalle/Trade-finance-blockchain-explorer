@@ -27,17 +27,20 @@ def create_transaction(
     db: Session = Depends(get_db)
 ):
 
-    new_transaction = TradeTransaction(
-    buyer_id=transaction.buyer_id,
-    seller_id=transaction.seller_id,
-    amount=transaction.amount,
-    currency=transaction.currency,
-    status="pending",
-    risk_score=risk_score
-)
+    risk_score = calculate_risk(
+        transaction.amount,
+        "pending"
+    )
 
-    new_transaction.risk_score = calculate_risk_score(new_transaction)
-    risk_score = calculate_risk(transaction.amount, "pending")
+    new_transaction = TradeTransaction(
+        buyer_id=transaction.buyer_id,
+        seller_id=transaction.seller_id,
+        amount=transaction.amount,
+        currency=transaction.currency,
+        status="pending",
+        risk_score=risk_score
+    )
+
     db.add(new_transaction)
     db.commit()
     db.refresh(new_transaction)
@@ -61,7 +64,6 @@ def create_transaction(
         "message": "Transaction created",
         "transaction_id": new_transaction.id
     }
-
 
 # =========================
 # GET ALL TRANSACTIONS
@@ -92,7 +94,10 @@ def update_transaction_status(
         )
 
     transaction.status = data.status
-    transaction.risk_score = calculate_risk_score(transaction)
+    transaction.risk_score = calculate_risk(
+    transaction.amount,
+    data.status
+)
     db.commit()
     db.refresh(transaction)
 
