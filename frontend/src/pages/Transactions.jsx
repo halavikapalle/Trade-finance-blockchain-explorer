@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { toast } from "react-toastify";
 function Transactions() {
+  const API = import.meta.env.VITE_API_URL;
   const [transactions, setTransactions] = useState([]);
 
   const [buyerId, setBuyerId] = useState("");
@@ -13,9 +14,16 @@ function Transactions() {
 
   const fetchTransactions = async () => {
     try {
+      const token = localStorage.getItem("token");
+
       const response = await axios.get(
-  "https://trade-finance-backend-oi57.onrender.com/transactions/"
-);
+        `${API}/transactions/`,
+      {
+        headers: {
+         Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
       setTransactions(response.data);
     } catch (error) {
@@ -32,7 +40,7 @@ function Transactions() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-  "https://trade-finance-backend-oi57.onrender.com/transactions/",
+        `${API}/transactions/`,
   {
     buyer_id: Number(buyerId),
     seller_id: Number(sellerId),
@@ -62,7 +70,7 @@ function Transactions() {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `https://trade-finance-backend-oi57.onrender.com/transactions/${id}/status`,
+        `${API}/transactions/${id}/status`,
         {
           status,
         }
@@ -79,7 +87,7 @@ function Transactions() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `https://trade-finance-backend-oi57.onrender.com/transactions/${id}`,
+        `${API}/transactions/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

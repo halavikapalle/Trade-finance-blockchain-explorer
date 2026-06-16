@@ -20,7 +20,7 @@ function Documents() {
     const token = localStorage.getItem("token");
 
     const response = await axios.get(
-      "https://trade-finance-backend-oi57.onrender.com/documents/",
+      `${API}/documents/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
