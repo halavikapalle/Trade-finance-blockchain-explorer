@@ -25,7 +25,7 @@ function Analytics() {
   const [analytics, setAnalytics] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [error, setError] = useState(null);
-  const API = import.meta.env.VITE_API_URL;
+  
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
 
   const fetchAnalytics = async () => {
