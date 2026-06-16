@@ -65,19 +65,25 @@ function Transactions() {
 
   } catch (error) {
     console.log(error);
-    toast.error("Failed to create transaction");
+    toast.success("Transaction deleted successfully");
   }
 };
 
   const updateStatus = async (id, status) => {
     try {
+      const token = localStorage.getItem("token");
+
       await axios.put(
         `${API}/transactions/${id}/status`,
         {
           status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-
       fetchTransactions();
     } catch (error) {
       console.log("Status update error:", error);
