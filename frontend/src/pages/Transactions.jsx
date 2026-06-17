@@ -65,7 +65,7 @@ function Transactions() {
 
   } catch (error) {
     console.log(error);
-    toast.success("Transaction deleted successfully");
+    toast.error("Transaction is not created");
   }
 };
 
@@ -103,7 +103,7 @@ function Transactions() {
         }
       );
 
-      toast.error("Failed to Delete transaction");
+      toast.success("Transaction deleted successfully");
 
       fetchTransactions();
     } catch (error) {

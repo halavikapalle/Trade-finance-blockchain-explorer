@@ -211,7 +211,8 @@ def download_document(
         action="DOWNLOAD_DOCUMENT",
         details=f"Downloaded document ID {document.id}"
         )
-
+    print("FILE PATH:", document.file_path)
+    print("EXISTS:", os.path.exists(document.file_path))
     if not os.path.exists(document.file_path):
         raise HTTPException(
             status_code=404,
