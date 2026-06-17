@@ -67,47 +67,29 @@ function Documents() {
   };
 
   
-  const downloadDocument = async (id) => {
+ const downloadDocument = async (id) => {
+  try {
 
-    try {
+    const token = localStorage.getItem("token");
 
-      const token = localStorage.getItem("token");
+    const response = await axios.get(
+      `${API}/documents/download/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-      const response = await axios.get(
-        `${API}/documents/download/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          responseType: "blob",
-        }
-      );
+    window.open(response.data.download_url,"_blank");
 
-      const url = window.URL.createObjectURL(
-        new Blob([response.data])
-      );
+  } catch (error) {
 
-      const link = document.createElement("a");
+    console.error(error);
 
-      link.href = url;
-
-      link.setAttribute(
-        "download",
-        `document_${id}.pdf`
-      );
-
-      document.body.appendChild(link);
-
-      link.click();
-
-    } catch (error) {
-
-      console.error(error);
-
-      toast.error("Download failed");
-    }
-  };
-
+    toast.error("Download failed");
+  }
+};
   
   const deleteDocument = async (id) => {
 
