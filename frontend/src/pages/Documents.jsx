@@ -44,7 +44,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `${API}/documents/${id}/verify`,
+        `${API}/documents/verify/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
