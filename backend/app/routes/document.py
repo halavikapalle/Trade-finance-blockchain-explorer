@@ -42,10 +42,6 @@ def verify_document(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    print("VERIFY API HIT")
-    print("DOCUMENT ID:", document_id)
-    print("CURRENT USER:", current_user.id)
-
     document = db.query(TradeDocument).filter(
         TradeDocument.id == document_id
     ).first()
@@ -56,32 +52,51 @@ def verify_document(
             detail="Document not found"
         )
 
-    
+    if not document.file_url:
+        raise HTTPException(
+            status_code=400,
+            detail="No Cloudinary URL found"
+        )
 
-    file_bytes = requests.get(document.file_url).content
-    current_hash = hashlib.sha256(file_bytes).hexdigest()
+    response = requests.get(document.file_url)
+
+    if response.status_code != 200:
+        raise HTTPException(
+            status_code=404,
+            detail="Unable to fetch document from Cloudinary"
+        )
+
+    file_bytes = response.content
+
+    current_hash = hashlib.sha256(
+        file_bytes
+    ).hexdigest()
 
     verification_status = (
         "VALID"
         if current_hash == document.blockchain_hash
         else "TAMPERED"
     )
-    if verification_status == "VALID":
-        document.is_verified = True
-        document.status = "Verified"
-    else:
-        document.is_verified = False
-        document.status = "Tampered"
+
+    document.is_verified = (
+        verification_status == "VALID"
+    )
+
+    document.status = (
+        "Verified"
+        if verification_status == "VALID"
+        else "Tampered"
+    )
 
     db.commit()
 
-    
     create_audit_log(
-    db=db,
-    user_id=current_user.id,
-    action="VERIFY_DOCUMENT",
-    details=f"Verified document ID {document.id}"
-)
+        db=db,
+        user_id=current_user.id,
+        action="VERIFY_DOCUMENT",
+        details=f"Verified document ID {document.id}"
+    )
+
     create_ledger_entry(
         db=db,
         document_id=document.id,
@@ -89,6 +104,7 @@ def verify_document(
         action="VERIFY_DOCUMENT",
         event_details=f"Verified document {document.id}"
     )
+
     return {
         "document_id": document.id,
         "file_name": document.file_name,
@@ -127,6 +143,8 @@ def upload_document(
     file.file.seek(0)
 
     file_url, public_id = upload_file(file)
+    print("FILE URL:", file_url)
+    print("PUBLIC ID:", public_id)
     
     new_document = TradeDocument(
         title=title,
@@ -162,11 +180,11 @@ def upload_document(
     )
 
     return {
-    "message": "PDF uploaded successfully",
-    "document_id": new_document.id,
-    "file_name": file.filename,
-    "blockchain_hash": blockchain_hash
-}
+        "message": "PDF uploaded successfully",
+        "document_id": new_document.id,
+        "file_name": file.filename,
+        "blockchain_hash": blockchain_hash
+    }
 # ---------------------------
 # GET AUDIT LOGS
 # ---------------------------
