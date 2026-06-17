@@ -32,15 +32,21 @@ class TradeDocument(Base):
         String,
         nullable=False
     )
+    
     file_path = Column(
     String
     )
 
+    file_url = Column(String)
+    
     blockchain_hash = Column(
         String
     )
 
-    is_verified = Column(Boolean, default=False)
+    is_verified = Column(
+        Boolean, 
+        default=False
+    )
     status = Column(
         String,
         default="Pending"

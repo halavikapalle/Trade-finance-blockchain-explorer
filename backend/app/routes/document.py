@@ -1,6 +1,8 @@
 import os
 import shutil
 import uuid
+import requests
+import hashlib
 from fastapi.responses import FileResponse
 from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException
 from sqlalchemy.orm import Session
@@ -19,6 +21,8 @@ from app.models.audit_log import AuditLog
 from app.services.audit_service import create_audit_log
 from app.services.ledger_service import create_ledger_entry
 from app.models.ledger_entry import LedgerEntry
+from app.services.cloudinary_service import upload_file
+
 
 router = APIRouter(
     prefix="/documents",
@@ -53,13 +57,10 @@ def verify_document(
             detail="Document not found"
         )
 
-    if not os.path.exists(document.file_path):
-        raise HTTPException(
-            status_code=404,
-            detail="Document file not found on server"
-        )
+    
 
-    current_hash = generate_file_hash(document.file_path)
+    file_bytes = requests.get(document.file_url).content
+    current_hash = hashlib.sha256(file_bytes).hexdigest()
 
     verification_status = (
         "VALID"
@@ -118,21 +119,18 @@ def upload_document(
         )
 
     
-    unique_filename = str(uuid.uuid4()) + "_" + file.filename
-    file_path = os.path.join(UPLOAD_FOLDER, unique_filename)
+    file_url, public_id = upload_file(file.file)
 
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
-    
-    blockchain_hash = generate_file_hash(file_path)
+    file_bytes = requests.get(file_url).content
+    blockchain_hash = hashlib.sha256(file_bytes).hexdigest()
 
     
     new_document = TradeDocument(
         title=title,
         document_type=document_type,
-        file_name=unique_filename,
-        file_path=file_path,
+        file_name=file.filename,
+        file_path=public_id,
+        file_url=file_url,  
         blockchain_hash=blockchain_hash,
         uploaded_by=current_user.id
     )
@@ -161,10 +159,10 @@ def upload_document(
     )
 
     return {
-        "message": "PDF uploaded successfully",
-        "document_id": new_document.id,
-        "file_name": unique_filename,
-        "blockchain_hash": blockchain_hash
+    "message": "PDF uploaded successfully",
+    "document_id": new_document.id,
+    "file_name": file.filename,
+    "blockchain_hash": blockchain_hash
 }
 # ---------------------------
 # GET AUDIT LOGS
@@ -203,33 +201,26 @@ def download_document(
             status_code=404,
             detail="Document not found"
         )
-
-
     create_audit_log(
-        db=db,
-        user_id=current_user.id,
-        action="DOWNLOAD_DOCUMENT",
-        details=f"Downloaded document ID {document.id}"
-        )
-    print("FILE PATH:", document.file_path)
-    print("EXISTS:", os.path.exists(document.file_path))
-    if not os.path.exists(document.file_path):
-        raise HTTPException(
-            status_code=404,
-            detail="File not found on server"
-    )
+    db=db,
+    user_id=current_user.id,
+    action="DOWNLOAD_DOCUMENT",
+    details=f"Downloaded document ID {document.id}"
+)
+
     create_ledger_entry(
         db=db,
         document_id=document.id,
         actor_id=current_user.id,
         action="DOWNLOAD_DOCUMENT",
         event_details=f"Downloaded document {document.id}"
-        )
-    return FileResponse(
-        path=document.file_path,
-        filename=document.file_name,
-        media_type='application/pdf'
     )
+
+    return {
+        "download_url": document.file_url
+    }
+
+    
 # ---------------------------
 # DELETE DOCUMENT
 # ---------------------------
@@ -251,8 +242,7 @@ def delete_document(
         )
 
     
-    if document.file_path and os.path.exists(document.file_path):
-        os.remove(document.file_path)
+    
     # AUDIT LOG
     create_audit_log(
         db=db,
