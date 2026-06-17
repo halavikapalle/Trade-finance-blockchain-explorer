@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+const API = import.meta.env.VITE_API_URL;
 function Documents() {
 
   const [documents, setDocuments] = useState([]);
@@ -44,7 +44,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/documents/verify/${id}",
+        `${API}/documents/${id}/verify`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/documents/download/${id}",
+        `${API}/documents/download/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -122,7 +122,7 @@ function Documents() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        "https://trade-finance-backend-oi57.onrender.com/documents/${id}",
+        `${API}/documents/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

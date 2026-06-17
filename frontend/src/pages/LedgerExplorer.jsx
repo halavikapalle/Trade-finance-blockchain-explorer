@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+const API = import.meta.env.VITE_API_URL;
 function LedgerExplorer() {
 
   const [entries, setEntries] = useState([]);
@@ -19,7 +19,7 @@ function LedgerExplorer() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/ledger/",
+        `${API}/ledger/`,
         {
           headers: {
             Authorization: `Bearer ${token}`

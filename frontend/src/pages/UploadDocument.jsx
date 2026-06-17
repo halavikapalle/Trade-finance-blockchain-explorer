@@ -4,6 +4,7 @@ import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { toast } from "react-toastify";
+const API = import.meta.env.VITE_API_URL;
 function UploadDocument() {
 
   const [title, setTitle] = useState("");

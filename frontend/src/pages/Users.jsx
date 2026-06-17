@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+const API = import.meta.env.VITE_API_URL;
 function Users() {
 
   const [users, setUsers] = useState([]);
@@ -27,7 +27,7 @@ function Users() {
         localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/users/",
+        `${API}/users/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

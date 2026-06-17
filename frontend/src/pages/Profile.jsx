@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+const API = import.meta.env.VITE_API_URL;
 function Profile() {
   const [user, setUser] = useState(null);
 
@@ -16,7 +16,7 @@ function Profile() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://trade-finance-backend-oi57.onrender.com/users/me",
+        `${API}/profile/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
