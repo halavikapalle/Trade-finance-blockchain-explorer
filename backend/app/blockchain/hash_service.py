@@ -1,5 +1,5 @@
 import hashlib
-
+import os
 
 def generate_hash(data: str):
 
@@ -12,12 +12,16 @@ def generate_hash(data: str):
     return hash_object.hexdigest()
 def generate_file_hash(file_path: str):
 
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(
+            f"File not found: {file_path}"
+        )
+
     sha256 = hashlib.sha256()
 
     with open(file_path, "rb") as file:
 
         while True:
-
             chunk = file.read(4096)
 
             if not chunk:

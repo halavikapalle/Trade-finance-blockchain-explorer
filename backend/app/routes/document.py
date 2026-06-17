@@ -53,6 +53,12 @@ def verify_document(
             detail="Document not found"
         )
 
+    if not os.path.exists(document.file_path):
+        raise HTTPException(
+            status_code=404,
+            detail="Document file not found on server"
+        )
+
     current_hash = generate_file_hash(document.file_path)
 
     verification_status = (
