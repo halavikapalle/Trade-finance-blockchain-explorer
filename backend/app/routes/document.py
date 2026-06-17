@@ -1,7 +1,6 @@
 import os
 import shutil
 import uuid
-import requests
 import hashlib
 from fastapi.responses import FileResponse
 from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException
@@ -119,11 +118,15 @@ def upload_document(
         )
 
     
-    file_url, public_id = upload_file(file.file)
+    file.file.seek(0)
 
-    file_bytes = requests.get(file_url).content
-    blockchain_hash = hashlib.sha256(file_bytes).hexdigest()
+    content = file.file.read()
 
+    blockchain_hash = hashlib.sha256(content).hexdigest()
+
+    file.file.seek(0)
+
+    file_url, public_id = upload_file(file)
     
     new_document = TradeDocument(
         title=title,
