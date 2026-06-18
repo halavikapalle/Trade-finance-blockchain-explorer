@@ -87,7 +87,7 @@ function Profile() {
               </h2>
 
               <p className="text-xl font-semibold">
-                {user.name}
+                {user?.name}
               </p>
             </div>
 
@@ -97,7 +97,7 @@ function Profile() {
               </h2>
 
               <p className="text-xl font-semibold">
-                {user.email}
+                {user?.email}
               </p>
             </div>
 
@@ -107,7 +107,7 @@ function Profile() {
               </h2>
 
               <p className="text-xl font-semibold">
-                {user.role}
+                {user?.role}
               </p>
 
               </div>
@@ -118,7 +118,7 @@ function Profile() {
               </h2>
 
               <p className="text-xl font-semibold">
-                {user.org_name}
+                {user?.org_name}
               </p>
             </div>
 
