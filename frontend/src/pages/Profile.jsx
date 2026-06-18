@@ -30,6 +30,28 @@ function Profile() {
     }
   };
 
+  const updateRole = async (newRole) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.put(
+      `${API}/users/role`,
+      { role: newRole },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    // 🔥 IMPORTANT FIX
+    await fetchProfile(); // refresh UI
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   if (!user) {
     return <div className="p-10">Loading Profile...</div>;
   }
@@ -76,6 +98,13 @@ function Profile() {
               <p className="text-xl font-semibold">
                 {user.role}
               </p>
+
+              <button
+                onClick={() => updateRole("admin")}   // example role
+                className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+              >
+                Change Role
+              </button>
             </div>
 
             <div>

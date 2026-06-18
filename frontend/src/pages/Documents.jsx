@@ -213,14 +213,18 @@ function Documents() {
                             Download
                           </button>
 
-                          <button
-                            onClick={() =>
-                              verifyDocument(doc.id)
-                            }
-                            className="bg-green-500 text-white px-4 py-2 rounded-lg"
-                          >
-                            Verify
-                          </button>
+                          {doc.verification_status === "verified" ? (
+                            <button className="bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed">
+                              Verified
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => verifyDocument(doc.id)}
+                              className="bg-green-500 text-white px-4 py-2 rounded-lg"
+                            >
+                              Verify
+                            </button>
+                          )}
 
                           <button
                             onClick={() =>
@@ -230,6 +234,9 @@ function Documents() {
                           >
                             Delete
                           </button>
+                          <span className="ml-2 text-sm">
+                            {doc.verification_status}
+                          </span>
 
                         </td>
 
