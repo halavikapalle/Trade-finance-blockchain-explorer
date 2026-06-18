@@ -18,7 +18,7 @@ function Users() {
     role: "",
   });
 
-  // Fetch Users
+  
   const fetchUsers = async () => {
 
     try {
@@ -34,7 +34,7 @@ function Users() {
           },
         }
       );
-
+      console.log("USERS DATA:", response.data);
       setUsers(response.data);
 
     } catch (error) {
@@ -84,7 +84,7 @@ function Users() {
     }
   };
 
-  // Start Edit
+
   const startEdit = (user) => {
 
     setEditingUser(user.id);
@@ -96,7 +96,7 @@ function Users() {
     });
   };
 
-  // Update User
+  
   const updateUser = async (id) => {
 
     try {
@@ -105,7 +105,7 @@ function Users() {
         localStorage.getItem("token");
 
       await axios.put(
-        `https://trade-finance-backend-oi57.onrender.com/users/${id}`,
+        `${API}/users/${id}/role`,
         editForm,
         {
           headers: {
