@@ -26,9 +26,9 @@ function Profile() {
 
       setUser(response.data);
     } catch (error) {
-      console.log(response.data);
-      console.log(error);
-    }
+    console.log(error.response?.data);
+    console.log(error);
+  }
   };
 
   const updateRole = async (newRole) => {
@@ -53,9 +53,20 @@ function Profile() {
   }
 };
 
-  {user?.name || "Loading..."}
-  {user?.email || "Loading..."}
-  {user?.role || "Loading..."}
+  
+  if (!user) {
+  return (
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-1 bg-gray-100 min-h-screen">
+        <Navbar />
+        <div className="p-8">
+          Loading Profile...
+        </div>
+      </div>
+    </div>
+  );
+}
   return (
     <div className="flex">
       <Sidebar />
