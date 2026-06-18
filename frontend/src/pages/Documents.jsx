@@ -67,9 +67,8 @@ function Documents() {
   };
 
   
- const downloadDocument = async (id) => {
+  const downloadDocument = async (id) => {
   try {
-
     const token = localStorage.getItem("token");
 
     const response = await axios.get(
@@ -81,12 +80,10 @@ function Documents() {
       }
     );
 
-    window.open(response.data.download_url,"_blank");
+    window.open(response.data.download_url, "_blank");
 
   } catch (error) {
-
     console.error(error);
-
     toast.error("Download failed");
   }
 };
