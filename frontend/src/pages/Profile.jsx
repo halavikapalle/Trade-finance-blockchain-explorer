@@ -53,10 +53,9 @@ function Profile() {
   }
 };
 
-  if (!user) {
-    return <div className="p-10">Loading Profile...</div>;
-  }
-
+  {user?.name || "Loading..."}
+  {user?.email || "Loading..."}
+  {user?.role || "Loading..."}
   return (
     <div className="flex">
       <Sidebar />

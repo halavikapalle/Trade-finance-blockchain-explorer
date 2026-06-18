@@ -131,33 +131,27 @@ useEffect(() => {
     );
   };
   console.log("Analytics object:", analytics);
-  if (!analytics) {
-    return (
-      <div className="p-10 text-center">
-        Loading Analytics...
-      </div>
-    );
-  }
+  
 
   const documentTypeData = Object.entries(
-    analytics.document_types
-  ).map(([type, count]) => ({
-    type,
-    count,
-  }));
+  analytics?.document_types || {}
+).map(([type, count]) => ({
+  type,
+  count,
+}));
 
   const verificationData = [
-    {
-      name: "Verified",
-      value: analytics.verified_documents,
-    },
-    {
-      name: "Pending",
-      value:
-        analytics.total_documents -
-        analytics.verified_documents,
-    },
-  ];
+  {
+    name: "Verified",
+    value: analytics?.verified_documents || 0,
+  },
+  {
+    name: "Pending",
+    value:
+      (analytics?.total_documents || 0) -
+      (analytics?.verified_documents || 0),
+  },
+];
 
   return (
     <div className="flex">
@@ -183,7 +177,7 @@ useEffect(() => {
               </h2>
 
               <p className="text-4xl font-bold mt-4">
-                {analytics.total_documents}
+                {analytics?.total_documents || 0}
               </p>
             </div>
 
@@ -193,7 +187,7 @@ useEffect(() => {
               </h2>
 
               <p className="text-4xl font-bold mt-4">
-                {analytics.verified_documents}
+               {analytics?.verified_documents || 0}
               </p>
             </div>
 
@@ -203,7 +197,7 @@ useEffect(() => {
               </h2>
 
               <p className="text-4xl font-bold mt-4">
-                {analytics.total_audit_logs}
+               {analytics?.total_audit_logs || 0}
               </p>
             </div>
           </div>
