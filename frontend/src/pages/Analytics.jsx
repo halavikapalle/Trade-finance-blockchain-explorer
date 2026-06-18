@@ -131,7 +131,19 @@ useEffect(() => {
     );
   };
   console.log("Analytics object:", analytics);
-  
+  if (!analytics) {
+  return (
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-1 bg-gray-100 min-h-screen">
+        <Navbar />
+        <div className="p-8">
+          Loading Analytics...
+        </div>
+      </div>
+    </div>
+  );
+}
 
   const documentTypeData = Object.entries(
   analytics?.document_types || {}
@@ -300,10 +312,10 @@ useEffect(() => {
                 </tr>
               </thead>
 
-              <tbody>
-                {Object.entries(
-                  analytics.document_types
-                ).map(([type, count]) => (
+                <tbody>
+                  {Object.entries(
+                    analytics?.document_types || {}
+                  ).map(([type, count]) => (
                   <tr
                     key={type}
                     className="border-b"
