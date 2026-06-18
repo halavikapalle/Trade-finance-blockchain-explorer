@@ -1,12 +1,9 @@
 
-
 # 🚀 Trade Finance Blockchain Explorer
 
 ### Blockchain-Inspired Trade Finance Management System
 
 Secure • Transparent • Tamper-Evident • Analytics-Driven
-
-</div>
 
 ---
 
@@ -15,6 +12,17 @@ Secure • Transparent • Tamper-Evident • Analytics-Driven
 Trade Finance Blockchain Explorer is a full-stack enterprise-style application designed to provide secure and transparent tracking of trade documents, transactions, and audit logs.
 
 The platform uses a **blockchain-inspired immutable ledger architecture** with cryptographic hashing to ensure integrity, traceability, and tamper-evident financial operations.
+
+---
+
+## 🌐 Live Demo
+
+**Frontend:**
+https://trade-finance-blockchain-explorer-mu.vercel.app
+
+**Backend API:**
+https://trade-finance-backend-oi57.onrender.com/docs
+
 
 ---
 
