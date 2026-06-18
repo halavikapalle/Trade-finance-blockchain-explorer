@@ -100,20 +100,7 @@ function Profile() {
                 {user.role}
               </p>
 
-              <button
-                onClick={() => updateRole("admin")}
-                className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
-              >
-                Make Admin
-              </button>
-
-              <button
-                onClick={() => updateRole("admin")}   // example role
-                className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
-              >
-                Change Role
-              </button>
-            </div>
+              </div>
 
             <div>
               <h2 className="text-gray-500">
