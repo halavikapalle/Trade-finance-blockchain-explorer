@@ -26,6 +26,7 @@ function Profile() {
 
       setUser(response.data);
     } catch (error) {
+      console.log(response.data);
       console.log(error);
     }
   };
@@ -44,8 +45,8 @@ function Profile() {
       }
     );
 
-    // 🔥 IMPORTANT FIX
-    await fetchProfile(); // refresh UI
+    
+    await fetchProfile(); 
 
   } catch (error) {
     console.log(error);
@@ -98,6 +99,13 @@ function Profile() {
               <p className="text-xl font-semibold">
                 {user.role}
               </p>
+
+              <button
+                onClick={() => updateRole("admin")}
+                className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+              >
+                Make Admin
+              </button>
 
               <button
                 onClick={() => updateRole("admin")}   // example role

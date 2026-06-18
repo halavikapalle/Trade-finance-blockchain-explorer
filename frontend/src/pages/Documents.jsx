@@ -27,44 +27,38 @@ function Documents() {
         },
       }
     );
-
+    console.log(response.data);
+    console.log("DOCUMENTS FROM API:", response.data);
     setDocuments(response.data);
 
-  } catch (error) {
-    console.error(error);
-  } finally {
+  }
+  catch (error) {
+  console.log(error.response?.data);
+  console.error(error);
+} 
+  finally {
     setLoading(false);
   }
 };
   
   const verifyDocument = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
 
-    try {
+    await axios.get(`${API}/documents/verify/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-      const token = localStorage.getItem("token");
+    toast.success("Document verified");
 
-      const response = await axios.get(
-        `${API}/documents/verify/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    
+    fetchDocuments();
 
-      toast.success(
-    `Verification Status: ${response.data.verification_status}`
-  );
-
-      fetchDocuments();
-
-    } catch (error) {
-
-      console.error(error);
-
-      toast.error("Verify failed");
-    }
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error("Verify failed");
+  }
+};
 
   
   const downloadDocument = async (id) => {
