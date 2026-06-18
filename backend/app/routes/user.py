@@ -64,15 +64,14 @@ def update_user(
             detail="User not found"
         )
 
-    if "name" in data:
-        user.name = data["name"]
+    if data.name is not None:
+        user.name = data.name
 
-    if "email" in data:
-        user.email = data["email"]
+    if data.email is not None:
+        user.email = data.email
 
-    if "role" in data:
-        user.role = data["role"]
-
+    if data.role is not None:
+        user.role = data.role
     db.commit()
 
     return {
