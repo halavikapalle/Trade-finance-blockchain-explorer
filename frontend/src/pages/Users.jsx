@@ -64,7 +64,7 @@ function Users() {
         localStorage.getItem("token");
 
       await axios.delete(
-        `https://trade-finance-backend-oi57.onrender.com/users/${id}`,
+        `${API}/users/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -105,7 +105,7 @@ function Users() {
         localStorage.getItem("token");
 
       await axios.put(
-        `${API}/users/${id}/role`,
+        `${API}/users/${id}`,
         editForm,
         {
           headers: {
