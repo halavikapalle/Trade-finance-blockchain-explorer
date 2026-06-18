@@ -66,11 +66,16 @@ def verify_document(
             detail="Unable to fetch document from Cloudinary"
         )
 
-    file_bytes = response.content
+    print("FILE URL:", document.file_url)
 
-    current_hash = hashlib.sha256(
-        file_bytes
-    ).hexdigest()
+    file_bytes = requests.get(document.file_url).content
+
+    print("DOWNLOADED BYTES:", len(file_bytes))
+
+    current_hash = hashlib.sha256(file_bytes).hexdigest()
+
+    print("STORED HASH:", document.blockchain_hash)
+    print("CURRENT HASH:", current_hash)
 
     verification_status = (
         "VALID"
