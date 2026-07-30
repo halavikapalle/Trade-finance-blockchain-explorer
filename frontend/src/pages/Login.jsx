@@ -3,6 +3,7 @@ import axios from "axios"
 import { useNavigate, Link} from "react-router-dom"
 import { toast } from "react-toastify";
 const API = import.meta.env.VITE_API_URL;
+console.log("API URL:", API);
 function Login() {
   
   const navigate = useNavigate();
